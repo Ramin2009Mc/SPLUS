@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СОВЕТНИК ПЛЮС</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<style>
+    @font-face {
+            font-family: 'Gel';
+            src: url('fonts/gleford.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+    @font-face {
+            font-family: 'sp';
+            src: url('fonts/projectSpace.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+      @font-face {
+            font-family: 'umo';
+            src: url('fonts/UltramonoWide-Bold.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+    @font-face {
+            font-family: 'del';
+            src: url('fonts/Deledda.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+    body {
+            margin: 0;
+            padding: 0;
+            color: aliceblue;
+        }
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            transform: translate(-50%, -50%);
+        }
+        #mainH1{
+            margin-top: 50px;
+        }
+        #instruction{
+            color: #1c1c1c;
+        }
+        .modal {
+            color: #1c1c1c;
+            backdrop-filter: blur(5px);
+        }
+        #mainH1{
+            font-family: 'Gel', sans-serif;
+            font-size: 50px;
+        }
+        .questionTitle{
+            font-family: 'sp', sans-serif;
+        }
+        #header {
+            backdrop-filter: blur(10px);
+            background-color: #001322;
+            opacity: 90%;
+            margin-bottom: 150px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        } 
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 10px;
+            font-size: 30px;
+            font-family: 'umo', sans-serif;
+            color: aliceblue;
+        }
+        .navbar-brand:hover {
+            color: aliceblue;
+        }
+        .nav-link{
+            color: white;
+            font-family: 'del', sans-serif;
+            font-size: 20px;
+            border-radius: 3px;
+        }
+
+        .nav-link:hover {
+            background-color: aliceblue;
+
+        }
+
+        .nav-item {
+            margin-right: 10px;
+        }
+
+        .nav-item:last-child {
+            margin-right: 0;
+        }
+        #submit{
+            border-radius: 5px;
+            margin-top: 20px;
+            background-color: #1351e0;
+            border: none;
+            padding: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            opacity: 100%;
+            font-size: 20px;
+        }
+        #submit:disabled{
+            background-color: #1c1c1c;
+        }
+        #submit:hover{
+            background-image: linear-gradient(to right, #1351e0, #121729, #364c96, #062671);
+        }
+        #tutor {
+            border-radius: 5px;
+            margin-top: 20px;
+            background-color: #425f9a;
+            border: none;
+            padding: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            opacity: 100%;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            transition: background-color 10.0s;
+        }
+
+        #tutor:hover {
+            background-image: linear-gradient(to right, #425f9a, #2593ca, #0a1d5d);
+        }
+        .buts{
+            display: inline-block;
+        }
+
+</style>
+</head>
+<body>
+    <header class="navbar navbar-expand-lg navbar-light" id = "header">
+            <div class="container">
+            <h1 class="navbar-brand">A+</h1>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="advisotBio.html" class="nav-link">Биография Советника+</a>
+                    </li>
+                    <li class = "nav-item">
+                        <a href="gallery.html" class="nav-link">Галерея</a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+    </header>
+    <video autoplay muted loop>
+        <source src="images/bg.mp4" type="video/mp4">
+    </video>
+    <div id="app" class="container">
+        <h1 class="text-center mb-4" id = "mainH1">Advisor<br>Plus</h1>
+        <div class="form-group">
+            <label class = "questionTitle" for ="question">Напиши твой вопрос</label>
+            <input type="text" class="form-control" id="question" v-model="userQuestion">
+        </div>
+       <button class="btn btn-primary" id = 'submit' @click="getRandomAnswer" :disabled="!userQuestion">Отправить</button>
+        <div class = "buts">
+            <div class="modal" id="answerModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Советник подумал и решил что</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Твой вопрос:</strong> {{ userQuestion }}</p>
+                        <p><strong>Ответ советника:</strong> {{ answer }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" id = "tutor">Обучение</button>
+
+    <div class="modal fade" id="myModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Обучение</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Привет, меня зовут советник плюс, я программа созданная для того чтобы давать ответы на ваши вопросы, сейчас расскажу каким образом, есть 2 совершенные границы моих ответов, это 'Нет' и 'Да', мои советы будут генерироваться из всего что лежит между ними, но ими быть они не могут, мои советы бесценны, они генерируются учитывая мой бесконечный жизненный опыт и интуицию, они очень краткие и минималистичные, либо положительные либо отрицательные, они помогут эффективно принять любое решение.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                userQuestion: '',
+                answers: [
+                    'Бесспорно', 'Наверное нет', 'Абсолютно точно да', 'Возможно',
+                    'Скорее да чем нет', 'Скорее нет чем да', 'Подумай', 'Очень может быть',
+                    'Я позвонил Байдону он сказал да', 'Позвонил Жаку Фреско, он не знает, но я почти уверен что нет',"Я думаю что ответ 'Может быть'",
+                    'Я сделаю вид будто я не видел этот вопрос', 'Почти да', 'Почти нет', 'Ответ не нет',
+                    'Не да', 'Мне кажется - да', 'Даже не думай', 'Предрешено',
+                    'Вероятнее всего', 'Спроси позже', 'Мой ответ - нет', 'Никаких сомнений', 'Хорошие перспективы',
+                    'Лучше не рассказывать', 'По моим данным - нет', 'Можешь быть уверен в этом',
+                    'Весьма сомнительно', "Как будто бы нет", "Наверное да", "Считаю что больше нет, чем да"
+                ],
+                answersDub: ['На этот вопрос я уже отвечал', 'Ответ на этот вопрос у тебя уже есть', 'Мой ответ не изменился', 'Ты уже спрашивал'], 
+                answer: ''
+            },
+           methods: {
+                getRandomAnswer() {
+                    if (this.userQuestion === this.previousQuestion) {
+                        const randomIndex = Math.floor(Math.random() * this.answersDub.length);
+                        this.answer = this.answersDub[randomIndex];
+                    } else {
+                        const randomIndex = Math.floor(Math.random() * this.answers.length);
+                        this.answer = this.answers[randomIndex];
+                        this.previousQuestion = this.userQuestion;
+                    }
+                    var answerModal = new bootstrap.Modal(document.getElementById('answerModal'));
+                    answerModal.show();
+                },
+                showTrainingModal() {
+                    var myModal = new bootstrap.Modal(document.getElementById('trainingModal'));
+                    myModal.show();
+                },
+                closeTrainingModal() {
+                    var myModal = new bootstrap.Modal(document.getElementById('trainingModal'));
+                    myModal.hide();
+                }
+            }
+        });
+            </script>
+    </body>
+</html>

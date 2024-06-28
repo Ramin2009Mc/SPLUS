@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СОВЕТНИК ПЛЮС</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<style>
+    @font-face {
+        font-family: 'gel';
+        src: url('fonts/gleford.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'sp';
+        src: url('fonts/projectspace.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'umo';
+        src: url('fonts/ultramonowide-bold.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'del';
+        src: url('fonts/deledda.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    body {
+        margin: 0;
+        height: 120%;
+        font-family: "del", sans-serif;
+        background: linear-gradient(180deg, black, #001322, #333333, rgb(0, 0, 41));
+    }
+
+    .container block{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #header {
+            backdrop-filter: blur(10px);
+            background-color: #001322;
+            opacity: 90%;
+            margin-bottom: 50px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        } 
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 10px;
+            font-size: 30px;
+            font-family: 'umo', sans-serif;
+            color: aliceblue;
+        }
+        .navbar-brand:hover {
+            color: #ffffff;
+            transform: scale(1.2); 
+        }
+        .nav-link{
+            color: white;
+            font-family: 'del', sans-serif;
+            font-size: 20px;
+            border-radius: 3px;
+            padding: 10px;
+        }
+
+        .nav-link:hover {
+            background-color: aliceblue;
+
+        }
+        .block {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        .nav-item {
+            margin-right: 10px;
+        }
+
+        .nav-item:last-child {
+            margin-right: 0;
+        }
+        #app{
+            width: auto;
+        }
+
+</style>
+<body>
+<header class="navbar navbar-expand-lg navbar-light" id="header">
+    <div class="container">
+    <a href="index.html" class="navbar-brand">A+</a>   
+    <a href="advisotBio.html" class="nav-link">Биография Советника+</a>    
+</header>
+<div id="app" class="container">
+        <div class="block">
+            <h2>Снимок советника для межгалактической прессы</h2>
+            <img src="images/gallery/press.jpg">
+        </div>
+
+        <div class="block">
+            <h2>Советник в раздумиях 2937 год</h2>
+            <img src="images/gallery/first.jpg">
+        </div>
+
+        <div class="block">
+            <h2>А1582 после тестирований 2914 год</h2>
+            <img src="images/gallery/third.jpg">
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="app.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        mounted() {
+            document.addEventListener('mousemove', this.handleMouseMove);
+        },
+        methods: {
+            handleMouseMove(event) {
+                const background = document.querySelector('.container');
+                const xPos = (event.clientX / window.innerWidth) * 100;
+                const yPos = (event.clientY / window.innerHeight) * 100;
+                background.style.backgroundPosition = $ {xPos }% ${yPos}%;
+            }
+        }
+    });
+        </script>
+    </body>
+</html> 
